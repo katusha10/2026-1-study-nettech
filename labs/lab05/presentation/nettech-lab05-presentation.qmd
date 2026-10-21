@@ -1,0 +1,159 @@
+---
+## Author
+author:
+  name:  Цыкунова Екатерина Михайловна
+  email: 1132246732@rudn.ru
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+
+## Title
+title: Лабораторная работа №5
+subtitle: Адресация IPv4 и IPv6. Настройка DHCP
+license: CC BY
+date: today
+date-format: "YYYY-MM-DD"
+---
+
+# Цели и задачи работы
+
+## Цель лабораторной работы
+
+Приобретение практических навыков настройки DHCP для IPv4 и IPv6, автоматического назначения сетевых адресов и анализа работы протоколов DHCP и DHCPv6 в среде GNS3.
+
+## Задачи лабораторной работы
+
+- создать топологию сети в GNS3 с использованием маршрутизатора VyOS и оконечных устройств;
+- настроить DHCP-сервер для автоматической выдачи IPv4-адресов;
+- настроить DHCPv6 без отслеживания состояния (Stateless) с использованием SLAAC;
+- настроить DHCPv6 с отслеживанием состояния (Stateful);
+
+# Настройка DHCP в сети IPv4
+
+## Создаю топологию сети
+
+![Топология сети для настройки DHCP в IPv4](image/01.png){ #fig:001 width=75% height=70% }
+
+## Настраиваю DHCP-сервер на VyOS
+
+![Настройка IPv4-адреса и диапазона DHCP на маршрутизаторе](image/04.png){ #fig:002 width=75% height=65% }
+
+## Проверяю первоначальное состояние DHCP-сервера
+
+![Статистика DHCP-сервера до подключения клиента](image/05.png){ #fig:003 width=75% height=70% }
+
+## Настраиваю получение IPv4-адреса на PC1
+
+![Получение IPv4-адреса 10.0.0.2 по DHCP на VPCS](image/06.png){ #fig:004 width=75% height=70% }
+
+## Проверяю IPv4-адресацию и соединение
+
+![Проверка IPv4-параметров и доступности маршрутизатора](image/07.png){ #fig:005 width=75% height=70% }
+
+## Проверяю выданные DHCP-адреса
+
+![Статистика DHCP-сервера после выдачи адреса клиенту](image/08.png){ #fig:006 width=75% height=70% }
+
+## Анализирую журнал DHCP-сервера
+
+![Просмотр DHCPDISCOVER, DHCPOFFER, DHCPREQUEST и DHCPACK в системном журнале](image/09.png){ #fig:007 width=80% height=70% }
+
+# Анализ DHCP-трафика в Wireshark
+
+## Анализирую сообщение DHCP Discover
+
+![Анализ широковещательного сообщения DHCP Discover](image/10.png){ #fig:008 width=85% height=70% }
+
+## Анализирую сообщение DHCP Offer
+
+![Анализ предложения IPv4-адреса в сообщении DHCP Offer](image/11.png){ #fig:009 width=85% height=70% }
+
+## Анализирую сообщение DHCP Request
+
+![Анализ запроса IPv4-адреса в сообщении DHCP Request](image/12.png){ #fig:010 width=85% height=70% }
+
+## Анализирую сообщение DHCP ACK
+
+![Анализ подтверждения выдачи IPv4-адреса DHCP ACK](image/13.png){ #fig:011 width=85% height=70% }
+
+# Настройка DHCPv6 без отслеживания состояния
+
+## Дополняю топологию сети
+
+![Топология сети для исследования Stateless и Stateful DHCPv6](image/14.png){ #fig:012 width=80% height=70% }
+
+## Настраиваю IPv6-интерфейсы маршрутизатора
+
+![Настройка IPv6-адресации интерфейсов VyOS](image/15.png){ #fig:013 width=75% height=70% }
+
+## Настраиваю Stateless DHCPv6
+
+![Настройка Stateless DHCPv6 и объявлений маршрутизатора](image/16.png){ #fig:014 width=75% height=65% }
+
+## Проверяю SLAAC на Alpine Linux
+
+![Проверка IPv6-адресации, маршрутизации и DNS на Alpine Linux PC2](image/19.png){ #fig:015 width=75% height=70% }
+
+## Проверяю SLAAC и DNS на AlmaLinux
+
+![Проверка автоматической IPv6-адресации и параметров DNS на AlmaLinux PC2](image/20.png){ #fig:016 width=75% height=70% }
+
+## Проверяю аренду адресов при Stateless DHCPv6
+
+![Проверка отсутствия записей аренды IPv6-адресов](image/21.png){ #fig:017 width=75% height=70% }
+
+# Анализ Stateless DHCPv6 в Wireshark
+
+## Анализирую сообщение Information-request
+
+![Анализ запроса дополнительных параметров DHCPv6 Information-request](image/22.png){ #fig:018 width=85% height=70% }
+
+## Анализирую сообщение DHCPv6 Reply
+
+![Анализ передачи DNS-сервера и домена поиска в DHCPv6 Reply](image/23.png){ #fig:019 width=85% height=70% }
+
+# Настройка DHCPv6 с отслеживанием состояния
+
+## Настраиваю Stateful DHCPv6
+
+![Настройка Stateful DHCPv6 и пула IPv6-адресов](image/24.png){ #fig:020 width=75% height=65% }
+
+## Получаю IPv6-адрес на Alpine Linux
+
+![Получение DHCPv6-аренды на Alpine Linux PC3](image/26.png){ #fig:021 width=75% height=70% }
+
+## Проверяю работу Stateful DHCPv6 на AlmaLinux
+
+![Проверка IPv6-адреса 2001::198, соединения и DNS на AlmaLinux PC3](image/28.png){ #fig:022 width=75% height=70% }
+
+# Анализ Stateful DHCPv6 в Wireshark
+
+## Анализирую сообщение DHCPv6 Solicit
+
+![Анализ поиска DHCPv6-сервера в сообщении Solicit](image/29.png){ #fig:023 width=85% height=70% }
+
+## Анализирую сообщение DHCPv6 Advertise
+
+![Анализ предложения IPv6-адреса 2001::198 в сообщении Advertise](image/30.png){ #fig:024 width=85% height=70% }
+
+## Анализирую сообщение DHCPv6 Request
+
+![Анализ запроса IPv6-адреса 2001::198 в сообщении Request](image/31.png){ #fig:025 width=85% height=70% }
+
+## Анализирую сообщение DHCPv6 Reply
+
+![Анализ подтверждения назначения IPv6-адреса в сообщении Reply](image/32.png){ #fig:026 width=85% height=70% }
+
+# Вывод
+
+## Результаты лабораторной работы
+
+На маршрутизаторе VyOS настроен DHCP-сервер для автоматического распределения IPv4-адресов, а также два режима DHCPv6: Stateless и Stateful.
+
+На устройствах VPCS, AlmaLinux и Alpine Linux проверены автоматическое получение сетевых параметров, настройки DNS и связность с маршрутизатором с помощью команды `ping`.
+
+В Wireshark проведён анализ сообщений DHCP Discover, Offer, Request, ACK, а также DHCPv6 Information-request, Solicit, Advertise, Request и Reply.
+
